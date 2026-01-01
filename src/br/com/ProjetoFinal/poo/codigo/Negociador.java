@@ -36,7 +36,7 @@ super(nome, vida, equipamentos, defesa, atributos, iniciativa, acoes);
             System.out.println("Escolha a ação...");
             System.out.println("1 - Usar Habilidade 1 (Barracuda)");
             System.out.println("2 - Usar Habilidade 2 (More Than a Feeling)");
-            System.out.println("3 - Realizar Descanso");
+            System.out.println("3 - Realizar Descanso (Finaliza o turno)");
             
             int escolha = scanner.nextInt();
 
@@ -51,7 +51,7 @@ super(nome, vida, equipamentos, defesa, atributos, iniciativa, acoes);
                     break;
                 case 3:
                     realizarDescanso(); 
-                    acoesRestantes--; 
+                    acoesRestantes = 0; 
                     System.out.println(getNome() + " realizou Descanso e terminou o turno.");
                     break;
                 default:
