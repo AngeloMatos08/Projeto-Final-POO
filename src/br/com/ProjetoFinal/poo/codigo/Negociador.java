@@ -1,5 +1,7 @@
 package br.com.ProjetoFinal.poo.codigo;
 
+import java.util.Scanner;
+
 public class Negociador extends Jogador{	
     //===== CONSTRUTORES =====
     public Negociador(String nome, int vida, String equipamentos, int defesa,
