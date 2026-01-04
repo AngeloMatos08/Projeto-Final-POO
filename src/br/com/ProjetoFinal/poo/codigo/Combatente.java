@@ -1,76 +1,31 @@
 package br.com.ProjetoFinal.poo.codigo;
 
-import java.util.Scanner;
+import javax.swing.JOptionPane;
 
-public class Combatente extends Jogador{	
-    //===== CONSTRUTORES =====
-    public Combatente(String nome, int vida, String equipamentos, int defesa,
-            int atributos, int iniciativa, int acoes) {
+public class Combatente extends Jogador {
+    
+    public Combatente(String nome, int f, int i, int a, int c) {
+        // Vida = 10 + (f*5) | Equipamento: Revólver e Munição | Defesa: 5 | Atributos(I), Iniciativa(C), Ações(A)
+        super(nome, 10 + (f * 5), "Revólver e Munições", 5, i, c, a);
+    }
 
-super(nome, vida, equipamentos, defesa, atributos, iniciativa, acoes);
-}
-	//====== MÉTODOS ======
     @Override
     public void usarHabilidade1() {
-    	System.out.println(getNome() + "está utilizando a habilidade Light My Fire(+1 em testes com revolver)");
-    	int rolagem = rolarD6();
-    	int resultado = rolagem + getAtributos() + 1;
-    	System.out.println("ROLAGEM : " + rolagem);
-    	System.out.println("RESULTADO FINAL : " + resultado);
+        int dado = rolarD6();
+        int intelecto = getAtributos(); // Soma o Intelecto ao teste
+        int resultado = dado + intelecto + 1; // +1 bônus da habilidade
+        
+        JOptionPane.showMessageDialog(null, 
+            "Habilidade: Light My Fire!\n" +
+            "Dado: " + dado + " | Intelecto: +" + intelecto + " | Bônus: +1\n" +
+            "Resultado do Ataque: " + resultado, 
+            "Combate", JOptionPane.INFORMATION_MESSAGE);
     }
-    
+
     @Override
     public void usarHabilidade2() {
-    	System.out.println(getNome() + "está utilizando a habilidade Lets Dance(2 tiros por ação com -1 nos testes)");
-    	
-    	for (int i = 1; i <= 2 ; i++) {
-    		int rolagem = rolarD6();
-    		int resultado = rolagem + getAtributos() - 1;
-    		
-    		System.out.println(" --- TIRO " + i + " ---");
-    		System.out.println("ROLAGEM : " + rolagem);
-    		System.out.println("RESULTADO FINAL : " + resultado);    }
-    }
-    
-    //===== POLIMORFISMO =====
-    @Override
-    public void executarTurno() {
-    	Scanner scanner = new Scanner(System.in);
-        int acoesRestantes = getAcoes();
-    	System.out.println("É o turno de " + getNome() + " (Combatente). Você tem " + getAcoes() + " ações.");
-    	
-    	while (acoesRestantes > 0) {
-            System.out.println("\nAções Restantes: " + acoesRestantes);
-            System.out.println("Escolha a ação...");
-            System.out.println("1 - Usar Habilidade 1 (Light My Fire)");
-            System.out.println("2 - Usar Habilidade 2 (Lets Dance)");
-            System.out.println("3 - Realizar Descanso (Finaliza o turno)");
-            
-            int escolha = scanner.nextInt();
-
-            switch (escolha) {
-                case 1:
-                    usarHabilidade1();
-                    acoesRestantes--; 
-                    break;
-                case 2:
-                    usarHabilidade2();
-                    acoesRestantes--; 
-                    break;
-                case 3:
-                    realizarDescanso(); 
-                    acoesRestantes= 0; 
-                    System.out.println(getNome() + " realizou Descanso e terminou o turno.");
-                    break;
-                default:
-                    System.out.println("Opção inválida. Tente novamente.");
-            }
-        }
-        
-    	setAcoes(acoesRestantes);
-        System.out.println("Sem ações restantes.");
-        System.out.println("--- FIM DO TURNO ---");
-        
-        scanner.close();
+        JOptionPane.showMessageDialog(null, 
+            getNome() + " usou Lets Dance!\nRealiza dois disparos rápidos gastando 1 ação.", 
+            "Habilidade Especial", JOptionPane.WARNING_MESSAGE);
     }
 }
